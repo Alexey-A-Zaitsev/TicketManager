@@ -78,7 +78,7 @@ class TicketManagerTest {
     public void shouldFindAndSortTicketsWithComparatorIfTheFlightTimeSame() {
 
         Ticket[] expected = {ticket1, ticket8};
-        Ticket[] actual = manager.findAll("VKO", "KZN", new TicketByPriceAscComparator());
+        Ticket[] actual = manager.findAll("VKO", "KZN", new TicketByFlightDurationAscComparator());
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -87,7 +87,7 @@ class TicketManagerTest {
     public void shouldFindAndSortTicketsWithComparator() {
 
         Ticket[] expected = {ticket10, ticket4};
-        Ticket[] actual = manager.findAll("KrR", "lEd", new TicketByPriceAscComparator());
+        Ticket[] actual = manager.findAll("KrR", "lEd", new TicketByFlightDurationAscComparator());
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -96,7 +96,7 @@ class TicketManagerTest {
     public void shouldNotFindAndSortTicketsWithComparator() {
 
         Ticket[] expected = new Ticket[0];
-        Ticket[] actual = manager.findAll("USK", "MRV", new TicketByPriceAscComparator());
+        Ticket[] actual = manager.findAll("USK", "MRV", new TicketByFlightDurationAscComparator());
 
         Assertions.assertArrayEquals(expected, actual);
     }
