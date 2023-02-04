@@ -2,6 +2,7 @@ package Tickets;
 
 import Repository.TicketRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,9 +22,8 @@ class TicketManagerTest {
     Ticket ticket9 = new Ticket(9, 534, "DME", "NUX", 100);
     Ticket ticket10 = new Ticket(10, 678, "KRR", "LED", 100);
 
-
-    @Test
-    public void shouldFindAndSortTickets() {
+    @BeforeEach
+    public void beforeAllTests() {
         manager.add(ticket1);
         manager.add(ticket2);
         manager.add(ticket3);
@@ -34,6 +34,10 @@ class TicketManagerTest {
         manager.add(ticket8);
         manager.add(ticket9);
         manager.add(ticket10);
+    }
+
+    @Test
+    public void shouldFindAndSortTickets() {
 
         Ticket[] expected = {ticket8, ticket1};
         Ticket[] actual = manager.searchBy("VKO", "KZN");
@@ -43,16 +47,6 @@ class TicketManagerTest {
 
     @Test
     public void shouldNotFindAndSortTickets() {
-        manager.add(ticket1);
-        manager.add(ticket2);
-        manager.add(ticket3);
-        manager.add(ticket4);
-        manager.add(ticket5);
-        manager.add(ticket6);
-        manager.add(ticket7);
-        manager.add(ticket8);
-        manager.add(ticket9);
-        manager.add(ticket10);
 
         Ticket[] expected = new Ticket[0];
         Ticket[] actual = manager.searchBy("LED", "KRR");
@@ -62,16 +56,6 @@ class TicketManagerTest {
 
     @Test
     public void shouldFindAndSortTicketsIfTheSecondPriceIsGreaterThanTheFirst() {
-        manager.add(ticket1);
-        manager.add(ticket2);
-        manager.add(ticket3);
-        manager.add(ticket4);
-        manager.add(ticket5);
-        manager.add(ticket6);
-        manager.add(ticket7);
-        manager.add(ticket8);
-        manager.add(ticket9);
-        manager.add(ticket10);
 
         Ticket[] expected = {ticket5, ticket6};
         Ticket[] actual = manager.searchBy("DME", "KZN");
@@ -81,22 +65,10 @@ class TicketManagerTest {
 
     @Test
     public void shouldFindAndSortTicketsIfPricesAreEqual() {
-        manager.add(ticket1);
-        manager.add(ticket2);
-        manager.add(ticket3);
-        manager.add(ticket4);
-        manager.add(ticket5);
-        manager.add(ticket6);
-        manager.add(ticket7);
-        manager.add(ticket8);
-        manager.add(ticket9);
-        manager.add(ticket10);
 
         Ticket[] expected = {ticket4, ticket10};
         Ticket[] actual = manager.searchBy("KRR", "LED");
 
         Assertions.assertArrayEquals(expected, actual);
     }
-
-
 }
